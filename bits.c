@@ -1,7 +1,8 @@
 /* 
  * CS:APP Data Lab 
  * 
- * <Please put your name and userid here>
+ * Ezekiel Elin
+ * eline
  * 
  * bits.c - Source file with your solutions to the Lab.
  *          This is the file you will hand in to your instructor.
@@ -184,7 +185,7 @@ int bitCount(int x) {
  *   Rating: 1
  */
 int bitXor(int x, int y) {
-  return 2;
+  return (~(x & y)) & ~(~x & ~y);
 }
 /* 
  * byteSwap - swaps the nth byte and the mth byte
