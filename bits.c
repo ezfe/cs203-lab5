@@ -1,7 +1,8 @@
 /* 
  * CS:APP Data Lab 
  * 
- * <Please put your name and userid here>
+ * Ezekiel Elin
+ * eline
  * 
  * bits.c - Source file with your solutions to the Lab.
  *          This is the file you will hand in to your instructor.
@@ -174,7 +175,47 @@ NOTES:
  *   Rating: 4
  */
 int bitCount(int x) {
-  return 2;
+  /* This solution works in all cases, however it has
+   * the side effect of requiring a large number of
+   * operations, and is not the most efficient way
+   * of achieving the count */
+
+  /* We shift every bit to the rightmost space (making
+   * the value of the bit 1) and add them all up */
+  int x0 = (x >> 0) & 1;
+  int x1 = (x >> 1) & 1;
+  int x2 = (x >> 2) & 1;
+  int x3 = (x >> 3) & 1;
+  int x4 = (x >> 4) & 1;
+  int x5 = (x >> 5) & 1;
+  int x6 = (x >> 6) & 1;
+  int x7 = (x >> 7) & 1;
+  int x8 = (x >> 8) & 1;
+  int x9 = (x >> 9) & 1;
+  int x10 = (x >> 10) & 1;
+  int x11 = (x >> 11) & 1;
+  int x12 = (x >> 12) & 1;
+  int x13 = (x >> 13) & 1;
+  int x14 = (x >> 14) & 1;
+  int x15 = (x >> 15) & 1;
+  int x16 = (x >> 16) & 1;
+  int x17 = (x >> 17) & 1;
+  int x18 = (x >> 18) & 1;
+  int x19 = (x >> 19) & 1;
+  int x20 = (x >> 20) & 1;
+  int x21 = (x >> 21) & 1;
+  int x22 = (x >> 22) & 1;
+  int x23 = (x >> 23) & 1;
+  int x24 = (x >> 24) & 1;
+  int x25 = (x >> 25) & 1;
+  int x26 = (x >> 26) & 1;
+  int x27 = (x >> 27) & 1;
+  int x28 = (x >> 28) & 1;
+  int x29 = (x >> 29) & 1;
+  int x30 = (x >> 30) & 1;
+  int x31 = (x >> 31) & 1;
+
+  return x0 + x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9 + x10 + x11 + x12 + x13 + x14 + x15 + x16 + x17 + x18 + x19 + x20 + x21 + x22 + x23 + x24 + x25 + x26 + x27 + x28 + x29 + x30 + x31;
 }
 /* 
  * bitXor - x^y using only ~ and & 
@@ -184,7 +225,28 @@ int bitCount(int x) {
  *   Rating: 1
  */
 int bitXor(int x, int y) {
-  return 2;
+  /* This works because we can show the truth tables
+    x: 1010
+    y: 1100
+
+    The left side:
+       x & y: 1000
+    ~(x & y): 0111
+
+    The right side:
+            ~x: 0101
+            ~y: 0011
+       ~x & ~y: 0001
+    ~(~x & ~y): 1110
+
+    Combining the two
+     sides with &:
+
+    0111 & 1110: 0110
+
+    Which is the same as the result of x ^ y    
+   */
+  return (~(x & y)) & ~(~x & ~y);
 }
 /* 
  * byteSwap - swaps the nth byte and the mth byte
@@ -196,7 +258,43 @@ int bitXor(int x, int y) {
  *  Rating: 2
  */
 int byteSwap(int x, int n, int m) {
-    return 2;
+  /* 
+   * identify the shift amounts for n and m, in bit-space
+   * this is done by multiplying them by 8 (the size of a byte)
+   */
+  int nshift = n << 3;
+  int mshift = m << 3;
+
+  /* Create a mask for the value of the two bytes we want to move around */
+  int nMask = 0xFF << (nshift);
+  int mMask = 0xFF << (mshift);
+
+  /*
+   * Get the value of those bytes, shifted back to the rightmost position
+   * For example,
+   * 0xA48C9F3C gets masked and becomes
+   * 0x008C0000, which then gets shifted to 0x8C
+  */
+
+  int nValue = ((x & nMask) >> (nshift)) & 0xFF;
+  int mValue = ((x & mMask) >> (mshift)) & 0xFF;
+
+  /* Easiest way to "set" a bit is if it starts as 0 */
+  int x2 = x & ~nMask;
+  int x3 = x2 & ~mMask;
+
+  /*
+   * Shift the values we got before to the byte that we want them to
+   * end up in.
+   */
+  int nTarget = mValue << (nshift);
+  int mTarget = nValue << (mshift);
+
+  /* OR them into the x variable */
+  int x4 = x3 | nTarget;
+  int x5 = x4 | mTarget;
+
+  return x5;
 }
 /*
  * isPower2 - returns 1 if x is a power of 2, and 0 otherwise
@@ -207,7 +305,8 @@ int byteSwap(int x, int n, int m) {
  *   Rating: 4
  */
 int isPower2(int x) {
-  return 2;
+  /* This filters out negative numbers from returning 1 */
+  return ((x >> 31) & 1) ^ 1;
 }
 /* 
  * logicalNeg - implement the ! operator, using all of 
@@ -218,7 +317,16 @@ int isPower2(int x) {
  *   Rating: 4 
  */
 int logicalNeg(int x) {
-  return 2;
+  /* Using or, move all the bits to space 1 */
+  int x1 = x | (x >> 16);
+  int x2 = x1 | (x1 >> 8);
+  int x3 = x2 | (x2 >> 4);
+  int x4 = x3 | (x3 >> 2);
+  int x5 = x4 | (x4 >> 1);
+  /* Flip the rightmost bit (negation part)*/
+  int x_1 = (x5 & 1) ^ 1;
+  /* Flip it again if the number is negative */
+  return x_1 & ~(x >> 31);
 }
 /* 
  * upperBits - pads n upper bits with 1's
@@ -229,7 +337,17 @@ int logicalNeg(int x) {
  *  Rating: 1
  */
 int upperBits(int n) {
-  return 2;
+  /*
+   * First, we put either a 1 or a 0 in the most significant bit space
+   * a 0 if n is 0, a 1 otherwise
+   */
+  int x = (!!n) << 31;
+  /*
+   * Then, we shift right n - 1 times
+   * If x was set to 0, then we have 0 0s (which is what we want)
+   * If x was set to 1, then we have 1 + (n - 1) 1s (also good)
+   */
+  return x >> (n + ~0);
 }
 /* 
  * minusOne - return a value of -1 
@@ -238,7 +356,8 @@ int upperBits(int n) {
  *   Rating: 1
  */
 int minusOne(void) {
-  return 2;
+  /* use logical NOT on 0x00000000 to get 0xFFFFFFFF */
+  return ~0;
 }
 /* 
  * isGreater - if x > y  then return 1, else return 0 
@@ -248,7 +367,69 @@ int minusOne(void) {
  *   Rating: 3
  */
 int isGreater(int x, int y) {
-  return 2;
+  /*
+   * Disregarding the challenge of overflows, the straightforward
+   * way to compare x and y is using subtraction and checking
+   * the sign on the bit
+   */
+
+  /*
+   * One issue encountered is that y == x should return 0, so I
+   * counter that by adding 1 to y, shifting everything over, causing
+   * the results to come back correct.
+   */
+  int yp1 = y + 1;
+
+  /*
+   * calculate x + (2s complement of y) in place of subtraction
+   */
+  int diff = x + (~yp1 + 1);
+
+  /*
+   * Get the sign of the leftmost bit. Flip it,
+   * because negative result should return 0, and
+   * positive should return 1, etc.
+   */
+  int flippedSign = ((diff >> 31) & 1) ^ 1;
+
+  /*
+   * The flipped sign bit can be returned in normal
+   * circumstances, however overflows etc. can cause
+   * odd behavior, so some other checks are needed
+   */
+
+  /*
+   * Get the sign bit for x and y
+   */
+  int xSign = ((x >> 31) & 1);
+  int ySign = ((y >> 31) & 1);
+
+  /*
+   * Generate bits for whether x is positive and y is negative
+   * or y is positive and x is negative. These two cases cover
+   * some edge cases and overflow problems
+   */
+  int xPosYneg = (xSign ^1) & ySign;
+  int yPosXneg = xSign & (ySign ^1);
+
+  /*
+   * Set the desired return bit on the condition that
+   * one of them is in fact 1
+   */
+  int desiredClearcaseRes = xPosYneg;
+
+  /*
+   * Decide whether to use the bit we just made
+   */
+  int clearcase = xPosYneg | yPosXneg;// | yZerXneg;
+
+  /*
+   * This statement returns the flippedSign bit, or, if clearcase is 1, the desiredClearcaseRes bit
+   *
+   * This is achieved by zero-ing out the flippedSign bit IF clearcase is 1, then
+   * ORing in the desiredCLearcaseRes if clearcase is 1.
+   */
+  return (flippedSign & (~clearcase)) | (desiredClearcaseRes & clearcase) /* zero out if clear */;
 }
 /*
  * bitParity - returns 1 if x contains an odd number of 0's
