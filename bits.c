@@ -470,7 +470,11 @@ int isGreater(int x, int y) {
  *   Rating: 4
  */
 int bitParity(int x) {
-    /* I have no idea where to start with this one */
-    return 2;
+    x = (x >> 16) ^ x;
+    x = (x >> 8) ^ x;
+    x = (x >> 4) ^ x;
+    x = (x >> 2) ^ x;
+    x = (x >> 1) ^ x;
+    return x & 1;
 }
 
