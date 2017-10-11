@@ -1,9 +1,9 @@
 /*
- * CS:APP Data Lab 
- * 
+ * CS:APP Data Lab
+ *
  * Ezekiel Elin
  * eline
- * 
+ *
  * bits.c - Source file with your solutions to the Lab.
  *          This is the file you will hand in to your instructor.
  *
@@ -176,12 +176,12 @@ this file the authoritative source.
  */
 int bitCount(int x) {
     /* This solution works in all cases, however it has
-    * the side effect of requiring a large number of
-    * operations, and is not the most efficient way
-    * of achieving the count */
-
+     * the side effect of requiring a large number of
+     * operations, and is not the most efficient way
+     * of achieving the count */
+    
     /* We shift every bit to the rightmost space (making
-    * the value of the bit 1) and add them all up */
+     * the value of the bit 1) and add them all up */
     int x0 = (x >> 0) & 1;
     int x1 = (x >> 1) & 1;
     int x2 = (x >> 2) & 1;
@@ -214,7 +214,7 @@ int bitCount(int x) {
     int x29 = (x >> 29) & 1;
     int x30 = (x >> 30) & 1;
     int x31 = (x >> 31) & 1;
-
+    
     return x0 + x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9 + x10 + x11 + x12 + x13 + x14 + x15 + x16 + x17 + x18 + x19 + x20 + x21 + x22 + x23 + x24 + x25 + x26 + x27 + x28 + x29 + x30 + x31;
 }
 /*
@@ -225,7 +225,6 @@ int bitCount(int x) {
  *   Rating: 1
  */
 int bitXor(int x, int y) {
-
     /* This works because we can show the truth tables
      x: 1010
      y: 1100
@@ -323,17 +322,17 @@ int isPower2(int x) {
      * 1000 and 0111, etc. We can then use the &
      * operator to get zero if it's a power of 2
      *
-     * We can see this doesn't work for other numbers. 
+     * We can see this doesn't work for other numbers.
      * For example, 7 is represented as
      * 0111. If we subtract 1, we get 0110.
      * 0111 & 0110 = 0110. This of course, doesn't equal zero
      *
      * To check for equality to zero, we can use the logical negation
      * operator, which will give us 1 if it's zero, 0 otherwise.
-     * 
+     *
      * The problematic cases are 0 and some negative numbers.
      * By checking the sign bit, we can eliminate negative numbers.
-     * 
+     *
      * By &-ing with !!x (==0 if x == 0), we can return 0 if x is 0.
      */
     
@@ -474,3 +473,4 @@ int bitParity(int x) {
     /* I have no idea where to start with this one */
     return 2;
 }
+
