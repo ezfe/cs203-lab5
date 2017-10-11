@@ -305,9 +305,40 @@ int byteSwap(int x, int n, int m) {
  *   Rating: 4
  */
 int isPower2(int x) {
-    /* This filters out negative numbers from returning 1 */
-    return ((x >> 31) & 1) ^ 1;
+    /*
+     * The main part of this expression,
+     * x & (x + ~0)
+     * servs to detect a power of 2.
+     * Remember that powers of 2 have a single
+     * 1 in them somewhere.
+     * for example, 2^2 == 4, and is represented
+     * with 00000100
+     * Of course, the number below that, 2^n - 1 is
+     * made of 1s, up to (but not including) the
+     * 1 from the 2^n example.
+     * If we take the passed number, and subtract one
+     * and it is a power of 2, then we would expect
+     * to get a pair of numbers like
+     * 1000 and 0111, etc. We can then use the &
+     * operator to get zero if it's a power of 2
+     *
+     * We can see this doesn't work for other numbers. 
+     * For example, 7 is represented as
+     * 0111. If we subtract 1, we get 0110.
+     * 0111 & 0110 = 0110. This of course, doesn't equal zero
+     *
+     * To check for equality to zero, we can use the logical negation
+     * operator, which will give us 1 if it's zero, 0 otherwise.
+     * 
+     * The problematic cases are 0 and some negative numbers.
+     * By checking the sign bit, we can eliminate negative numbers.
+     * 
+     * By &-ing with !!x (==0 if x == 0), we can return 0 if x is 0.
+     */
+    
+    return (!(x & (x + ~0))) & ((x >> 31)^1) & (!!x);
 }
+
 /*
  * logicalNeg - implement the ! operator, using all of
  *              the legal operators except !
@@ -326,7 +357,7 @@ int logicalNeg(int x) {
     /* Flip the rightmost bit (negation part)*/
     int x_1 = (x5 & 1) ^ 1;
     /* Flip it again if the number is negative */
-    return x_1 & ~(x >> 31);
+    return x_1 &    ;
 }
 /*
  * upperBits - pads n upper bits with 1's
@@ -439,5 +470,6 @@ int isGreater(int x, int y) {
  *   Rating: 4
  */
 int bitParity(int x) {
+    /* I have no idea where to start with this one */
     return 2;
 }
