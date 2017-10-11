@@ -1,9 +1,9 @@
 /*
- * CS:APP Data Lab
- *
+ * CS:APP Data Lab 
+ * 
  * Ezekiel Elin
  * eline
- *
+ * 
  * bits.c - Source file with your solutions to the Lab.
  *          This is the file you will hand in to your instructor.
  *
@@ -176,12 +176,12 @@ this file the authoritative source.
  */
 int bitCount(int x) {
     /* This solution works in all cases, however it has
-     * the side effect of requiring a large number of
-     * operations, and is not the most efficient way
-     * of achieving the count */
-    
+    * the side effect of requiring a large number of
+    * operations, and is not the most efficient way
+    * of achieving the count */
+
     /* We shift every bit to the rightmost space (making
-     * the value of the bit 1) and add them all up */
+    * the value of the bit 1) and add them all up */
     int x0 = (x >> 0) & 1;
     int x1 = (x >> 1) & 1;
     int x2 = (x >> 2) & 1;
@@ -214,7 +214,7 @@ int bitCount(int x) {
     int x29 = (x >> 29) & 1;
     int x30 = (x >> 30) & 1;
     int x31 = (x >> 31) & 1;
-    
+
     return x0 + x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9 + x10 + x11 + x12 + x13 + x14 + x15 + x16 + x17 + x18 + x19 + x20 + x21 + x22 + x23 + x24 + x25 + x26 + x27 + x28 + x29 + x30 + x31;
 }
 /*
@@ -225,6 +225,7 @@ int bitCount(int x) {
  *   Rating: 1
  */
 int bitXor(int x, int y) {
+
     /* This works because we can show the truth tables
      x: 1010
      y: 1100
