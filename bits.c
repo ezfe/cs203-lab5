@@ -357,7 +357,7 @@ int logicalNeg(int x) {
     /* Flip the rightmost bit (negation part)*/
     int x_1 = (x5 & 1) ^ 1;
     /* Flip it again if the number is negative */
-    return x_1 &    ;
+    return x_1 & ~(x >> 31);
 }
 /*
  * upperBits - pads n upper bits with 1's
