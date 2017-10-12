@@ -470,11 +470,25 @@ int isGreater(int x, int y) {
  *   Rating: 4
  */
 int bitParity(int x) {
+    /* XOR-ing the left side with the right side will cancel out paired bits
+     * For example,
+     * 1011 ^ 0110 = 1101, cancelling out a single pair in the 2nd spot (from right)
+     */
     x = (x >> 16) ^ x;
+    /*
+     * This is repeated.
+     * Using the same example,
+     * 11 ^ 01 = 10, cancelling out a second pair of 1s.
+     */
     x = (x >> 8) ^ x;
+    /*
+     * And repeated...
+     * 0 ^ 1 = 1, which is what one would expect...
+     */
     x = (x >> 4) ^ x;
     x = (x >> 2) ^ x;
     x = (x >> 1) ^ x;
+    /* & with 1 to mask out the other numbers left in the result */
     return x & 1;
 }
 
